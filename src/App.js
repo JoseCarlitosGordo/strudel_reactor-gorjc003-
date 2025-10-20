@@ -6,7 +6,7 @@ import { StrudelMirror } from '@strudel/codemirror';
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
-
+import PreProcessorControl from './PreProcessorControl';
 let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -124,18 +124,21 @@ return (
                         <div id="editor" />
                     </div>
                     <div className="col-md-4">
-                        <div className="form-check">
+                        {/* <div className="form-check">
                             <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={ProcAndPlay} defaultChecked />
                             <label className="form-check-label" htmlFor="flexRadioDefault1">
                                 p1: ON
                             </label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onChange={ProcAndPlay} />
-                            <label className="form-check-label" htmlFor="flexRadioDefault2">
-                                p1: HUSH
-                            </label>
-                        </div>
+                        </div> */}
+                         <PreProcessorControl
+                        text = "ON"
+                        element_id="flexRadioDefault1"
+                        default_check={true}/>
+                        <PreProcessorControl
+                        text = "HUSH"
+                        element_id="flexRadioDefault2"
+                        default_check={false}/>
+                        
                     </div>
                 </div>
             </div>
