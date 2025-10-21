@@ -6,7 +6,7 @@ import { StrudelMirror } from '@strudel/codemirror';
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
-import PreProcessorControl from './PreProcessorControl';
+import PreProcessorControl from './Components/PreProcessorControl';
 let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -108,10 +108,10 @@ return (
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
                         <textarea className="form-control" rows="15" id="proc" ></textarea>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-4 bg-dark">
 
                         <nav>
-                            <button id="process" className="btn btn-outline-primary">Preprocess</button>
+                            <button id="process" className="btn btn-primary">Preprocess</button>
                             <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
                             <br />
                             <button id="play" className="btn btn-outline-primary">Play</button>
@@ -124,12 +124,6 @@ return (
                         <div id="editor" />
                     </div>
                     <div className="col-md-4">
-                        {/* <div className="form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={ProcAndPlay} defaultChecked />
-                            <label className="form-check-label" htmlFor="flexRadioDefault1">
-                                p1: ON
-                            </label>
-                        </div> */}
                          <PreProcessorControl
                         text = "ON"
                         element_id="flexRadioDefault1"

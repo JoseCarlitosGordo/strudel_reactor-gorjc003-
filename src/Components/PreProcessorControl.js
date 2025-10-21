@@ -1,4 +1,4 @@
-import { ProcAndPlay } from "./App"
+import { ProcAndPlay } from "../App"
 export default function PreProcessorControl({text, element_id, default_check})
 {
     return(
