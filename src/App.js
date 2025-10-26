@@ -7,6 +7,7 @@ import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreProcessorControl from './Components/PreProcessorControl';
+import InstrumentList from './Components/InstrumentList';
 let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -107,7 +108,7 @@ return (
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
-                        <textarea className="form-control" rows="15" id="proc" ></textarea>
+                        <textarea className="form-control" rows="1" id="proc" ></textarea>
                     </div>
                     <div className="col-md-4 bg-dark">
 
@@ -119,6 +120,9 @@ return (
                             <button id="stop" className="btn btn-outline-primary">Stop</button>
                         </nav>
                     </div>
+                </div>
+                <div className="row">
+                    <InstrumentList/>
                 </div>
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>

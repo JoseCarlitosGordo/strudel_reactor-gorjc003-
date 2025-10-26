@@ -1,5 +1,5 @@
 import globalEditor, {Proc} from '../App'  
-import {useState, useEffect, setData} from 'react'
+import {useState} from 'react'
 
 
 
@@ -16,10 +16,11 @@ class Instrument
   {
     return ``
   }
+
 }
 
 
-const InstrumentObject = ({name, type, notes, gain} ) => 
+const InstrumentObject = ({name, type, notes, gain, function_to_add} ) => 
   {
    
     //create a new instrument 
@@ -38,12 +39,13 @@ const InstrumentObject = ({name, type, notes, gain} ) =>
    function update_instrument_notes(changed_value)
    {
        setData(prev => ({...prev, notes: String(changed_value.target.value)}))
+       function_to_add(data);
    }
   return (
     <div>
       <h1>{data.name}</h1>
       <p>Enjoy creating music with Strudel!</p>
-      <input type = 'text' id = 'notes' onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value={data.notes}/>
+      <input type = 'text' id = {'notes for ' + data.name} onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value={data.notes}/>
     </div>
   );
   };
