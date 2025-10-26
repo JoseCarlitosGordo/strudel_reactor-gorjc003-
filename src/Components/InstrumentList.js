@@ -56,6 +56,11 @@ export default function InstrumentList()
 
         
     }
+
+    function update_instrument_instance(new_instrument)
+    {
+        
+    }
     //toDO: modify instrumentDetails to be used for the creation of instruments instead
     var add_instrument_modal = null
     if(isModalOpen)
@@ -66,11 +71,12 @@ export default function InstrumentList()
         <div>
         <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
         
+        {/* Display modal for creating new instrument */}
         {add_instrument_modal}
 
         {
       instrument_list.instruments.map((instrument, index) => (
-
+        //TODO: replace this placeholder div with the instrument.js component
         <div key={index}>
           <p>{instrument.name}</p>
         </div>

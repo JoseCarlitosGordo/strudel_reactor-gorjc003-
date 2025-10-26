@@ -18,13 +18,12 @@ class Instrument
   }
 }
 
+
 const InstrumentObject = ({name, type, notes, gain} ) => 
   {
    
     //create a new instrument 
-    const [data, setData] = useState(
-    new Instrument(name, type, notes, gain)
-    );
+    const [data, setData] = useState(new Instrument(name, type, notes, gain));
   // useEffect(() => {
   //   // Create the instrument
   //   //TODO: console.log results of instrument
@@ -36,12 +35,15 @@ const InstrumentObject = ({name, type, notes, gain} ) =>
   //   //   synth.stop();
   //   // };
   // }, [data]);
-  
-  
+   function update_instrument_notes(changed_value)
+   {
+       setData(prev => ({...prev, notes: String(changed_value.target.value)}))
+   }
   return (
     <div>
       <h1>{data.name}</h1>
       <p>Enjoy creating music with Strudel!</p>
+      <input type = 'text' id = 'notes' onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value={data.notes}/>
     </div>
   );
   };
