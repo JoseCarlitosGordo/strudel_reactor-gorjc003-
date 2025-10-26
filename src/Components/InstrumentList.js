@@ -26,8 +26,23 @@ export default function InstrumentList()
     setIsModalOpen(false);
     }
 
+
+    //saves other states, but resets instrument_list to an empty list
+    function clear_all()
+    {
+        update_instrument_list((prev_state) =>
+        {
+            return {
+                ...prev_state, 
+                instruments: []
+
+
+            };
+        });
+    }
     function add_instrument(instrument)
     {
+        
         update_instrument_list((prev_state) =>
         {
             return {
@@ -37,20 +52,22 @@ export default function InstrumentList()
 
             };
         });
-        closeModal()
+       closeModal()
 
         
     }
     //toDO: modify instrumentDetails to be used for the creation of instruments instead
+    var add_instrument_modal = null
     if(isModalOpen)
     {
-        const added_instrument_component = <CreateInstrument/>
+         added_instrument_modal = <CreateInstrument function_to_add={add_instrument(instrument)} />
     }
     return(
         <div>
         <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
+        
+        {add_instrument_modal}
 
-       
         {
       instrument_list.instruments.map((instrument, index) => (
 

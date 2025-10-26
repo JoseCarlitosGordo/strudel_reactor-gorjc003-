@@ -37,6 +37,7 @@ const InstrumentObject = ({name, type, notes, gain} ) =>
   //   // };
   // }, [data]);
   
+  
   return (
     <div>
       <h1>{data.name}</h1>
