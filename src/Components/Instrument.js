@@ -21,7 +21,6 @@ export class Instrument
 
 const InstrumentObject = ({name, notes, gain, function_to_update} ) => 
   {
-   
     //create a new instrument 
     const [data, setData] = useState(new Instrument(name, notes, gain));
     const [isMuted, setIsMuted] = useState(false)
@@ -31,7 +30,7 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
     }
    function update_instrument_notes(changed_value)
    {
-       setData(prev => ({...prev, notes: String(changed_value.target.value)}))
+       setData(prev => ({...prev, notes: changed_value, strudelCode :'<'+data.name+'_radio>'+ data.name + ': \n' + changed_value}))
        function_to_update(data);
    }
   return (
@@ -40,8 +39,8 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
     <div className="card col-4" style={{width: "18rem;"}}>
       <div className="card-body">
         <h5 className="card-title">Instrument Name: {data.name}</h5>
-        <p className = "card-text"> Current Composition: {data.strudelCode} </p>
-        {/* <textarea id = {'notes_for_' + data.name} className ='form-control' onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/> */}
+        <p className = "card-text"> Current Composition for : {data.strudelCode} </p>
+        <textarea id = {'notes_for_' + data.name} className ='form-control' onInput = {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/>
         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input>
         {/* <button type='button' className="btn btn-danger" onClick={delete_function(data)}>Go somewhere</button> */}
       </div>
