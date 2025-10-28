@@ -9,7 +9,7 @@ export default function CreateInstrument({function_to_add})
         const new_instrument = new Instrument(name, notes, gain)
         function_to_add(new_instrument);
     }
-    const[name, setName] = useState('A cool Instrument');
+    const[name, setName] = useState('');
     const[notes, setNotes] = useState('');
     const[gain, setGain] = useState(0);
    
@@ -19,10 +19,11 @@ export default function CreateInstrument({function_to_add})
           <div className="custom-modal-content">
             <h2>Modal Title</h2>
             <p>This is the modal content.</p>
-           <input type='text' value = {name} onInput = {e =>setName(e.target.value)}/>
-             <input type='textarea' value = {notes} onInput = {e =>setNotes(e.target.value)}/>
-             <input type='range' min = '0' max = '100' value = {gain} onInput = {e =>setGain(e.target.value)}/>
-            <button onClick={create_instrument}>Create Instrument</button>
+            <input type='text' placeholder="Enter the name of your instrument here" onInput = {e =>setName(e.target.value)}/>
+             <textarea rows={5} placeholder="Enter the composition of your instrument here" onInput = {e =>setNotes(e.target.value)}/>
+             <label htmlFor='gain'><p> Gain slider</p></label> 
+             <input id = 'gain'type='range' min = '0' max = '100' value = {gain} onInput = {e =>setGain(e.target.value)}/>
+            <button id ="modal_button" onClick={create_instrument}>Create Instrument</button>
           </div>
     </div>
     )

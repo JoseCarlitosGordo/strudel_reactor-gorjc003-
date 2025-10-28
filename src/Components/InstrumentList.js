@@ -31,7 +31,7 @@ export default function InstrumentList()
     {
         
             
-        notes_to_play = ''
+        var notes_to_play = ''
         instrument_list.instruments.map(instrument => 
             (
             
@@ -67,10 +67,17 @@ export default function InstrumentList()
 
         
     }
-    function remove_instrument(instrument_to_remove)
-    {
-        update_instrument_list((prev_state) => prev_state.filter((instrument) => instrument.name !== instrument_to_remove.name));
-    }
+    // function remove_instrument(instrument_to_remove)
+    // {
+    //     update_instrument_list(prev_state => 
+    //         (
+    //             {
+    //                 ...prev_state, 
+    //                 instruments:  prev_state.instruments.filter((instrument) => instrument.name !== instrument_to_remove.name)
+    //             }
+    //         )
+    //     );
+    // }
 
     function update_instrument_instance(new_instrument)
     {
@@ -97,27 +104,27 @@ export default function InstrumentList()
     }
 
     //todo: add logic to handle muting of an instrument within instrument object
-    function toggle_mute(muted_instrument)
-    {
-         update_instrument_list
-        (prev_list => (
-        {
-            //gets previous state
-            ...prev_list, 
-            instruments:  prev_list.instruments.map(instrument =>
-                {
-                    if(instrument.name == new_instrument.name)
-                    {
-                        return {...instrument, ...muted_instrument};
-                    }
-                    else
-                    {
-                        return instrument;
-                    }
-                })
-        }));
+    // function toggle_mute(muted_instrument)
+    // {
+    //      update_instrument_list
+    //     (prev_list => (
+    //     {
+    //         //gets previous state
+    //         ...prev_list, 
+    //         instruments:  prev_list.instruments.map(instrument =>
+    //             {
+    //                 if(instrument.name == muted_instrument.name)
+    //                 {
+    //                     return {...instrument, ...muted_instrument};
+    //                 }
+    //                 else
+    //                 {
+    //                     return instrument;
+    //                 }
+    //             })
+    //     }));
 
-    }
+    // }
     
 
     
@@ -125,14 +132,14 @@ export default function InstrumentList()
         <div>
 
             <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
-            <button type = 'button' onClick={clear_all}> Add Instrument</button>
-            
+            <button type = 'button' onClick={clear_all}> Clear</button>
+        
             {/* Display modal for creating new instrument */}
             {isModalOpen && (
                 <CreateInstrument function_to_add={add_instrument} />
                
             )}
-            <div class = 'row justify-content-center'>
+            <div className = 'row justify-content-center'>
             {
              instrument_list.instruments.map((instrument, index) => (
             //TODO: replace this placeholder div with the instrument.js component
@@ -142,9 +149,9 @@ export default function InstrumentList()
                 name= {instrument.name}
                 notes = {instrument.notes}
                 gain = {instrument.gain}
-                function_to_add={update_instrument_instance}
+                function_to_update={update_instrument_instance}
                 //TODO: create function for deleting an instrument
-                delete_function={delete_instrument}
+                // delete_function={remove_instrument}
                 />
            
             ))
