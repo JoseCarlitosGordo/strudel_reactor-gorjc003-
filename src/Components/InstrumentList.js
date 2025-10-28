@@ -15,6 +15,7 @@ export default function InstrumentList()
 {
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [notes_to_play, setNotesToPlay] = useState('');
 
     function openAddInstrument()
     {
@@ -25,8 +26,25 @@ export default function InstrumentList()
     {
     setIsModalOpen(false);
     }
+    //This function will be called anytime an instrument is updated, added or deleted. 
+    function playableNotes()
+    {
+        
+            
+        notes_to_play = ''
+        instrument_list.instruments.map(instrument => 
+            (
+            
+            notes_to_play=  instrument.notes
+                
 
+            )
 
+        );
+        return notes_to_play
+            
+
+    }
     //saves other states, but resets instrument_list to an empty list
     function clear_all()
     {
@@ -48,6 +66,10 @@ export default function InstrumentList()
        closeModal()
 
         
+    }
+    function remove_instrument(instrument_to_remove)
+    {
+        update_instrument_list((prev_state) => prev_state.filter((instrument) => instrument.name !== instrument_to_remove.name));
     }
 
     function update_instrument_instance(new_instrument)
@@ -73,58 +95,61 @@ export default function InstrumentList()
         
         
     }
+
+    //todo: add logic to handle muting of an instrument within instrument object
+    function toggle_mute(muted_instrument)
+    {
+         update_instrument_list
+        (prev_list => (
+        {
+            //gets previous state
+            ...prev_list, 
+            instruments:  prev_list.instruments.map(instrument =>
+                {
+                    if(instrument.name == new_instrument.name)
+                    {
+                        return {...instrument, ...muted_instrument};
+                    }
+                    else
+                    {
+                        return instrument;
+                    }
+                })
+        }));
+
+    }
     
 
-    // useEffect(() =>
-    // {
-
     
-    //     if(isModalOpen)
-    //     {
-    //         add_instrument_modal = <CreateInstrument function_to_add={add_instrument} />
-    //     }
-    //     else
-    //     {
-    //         add_instrument_modal = null;
-
-    //     }
-    // },
-    // [isModalOpen]);
-    let add_instrument_modal;
-    // if(isModalOpen)
-    // {
-    //     add_instrument_modal = <CreateInstrument function_to_add={add_instrument} />
-    // }
-    // else
-    // {
-    //     add_instrument_modal = null
-
-    // }
     return(
         <div>
+
             <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
+            <button type = 'button' onClick={clear_all}> Add Instrument</button>
             
             {/* Display modal for creating new instrument */}
             {isModalOpen && (
                 <CreateInstrument function_to_add={add_instrument} />
                
             )}
-
+            <div class = 'row justify-content-center'>
             {
-        instrument_list.instruments.map((instrument, index) => (
+             instrument_list.instruments.map((instrument, index) => (
             //TODO: replace this placeholder div with the instrument.js component
         
-            <div>
+           
                 <InstrumentObject 
                 name= {instrument.name}
-                type = {instrument.type}
                 notes = {instrument.notes}
                 gain = {instrument.gain}
                 function_to_add={update_instrument_instance}
+                //TODO: create function for deleting an instrument
+                delete_function={delete_instrument}
                 />
-            </div>
+           
             ))
             }
+            </div>
         </div>
 
     );

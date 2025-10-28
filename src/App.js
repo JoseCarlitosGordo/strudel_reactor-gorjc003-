@@ -44,7 +44,7 @@ export function ProcAndPlay() {
 
 //TODO: Change it so that Proc checks all Instrument preprocessor controls instead of just one
 export function Proc() {
-
+    //toDO: Replace this with a parameter that takes in the proc_text to be replaced
     let proc_text = document.getElementById('proc').value
     let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
    

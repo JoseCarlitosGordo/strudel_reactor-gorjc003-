@@ -3,49 +3,52 @@ import {useState} from 'react'
 
 
 
-class Instrument
+export class Instrument
 {
-  constructor(name, type, notes, gain)
+  constructor(name, notes, gain)
   {
     this.name = name;
     this.type = type;
-    this.notes = notes
+    this.notes = '<'+this.name+'_radio>'+ this.name + ': \n' + notes
     this.gain = gain;
+    this.is_muted = false;
   }
-  strudel_code()
-  {
-    return ``
-  }
+  
 
 }
 
+//TODO: Implement mute button in here?
 
-const InstrumentObject = ({name, type, notes, gain, function_to_add} ) => 
+const InstrumentObject = ({name, notes, gain, function_to_add, delete_function} ) => 
   {
    
     //create a new instrument 
-    const [data, setData] = useState(new Instrument(name, type, notes, gain));
-  // useEffect(() => {
-  //   // Create the instrument
-  //   //TODO: console.log results of instrument
-  //   // Play a note
-  //   // synth.play({ frequency: 440, duration: 1 }); // Plays an A4 note for 1 second
+    const [data, setData] = useState(new Instrument(name, notes, gain));
+    const [isMuted, setIsMuted] = useState(false)
+   function isMutedTrue()
+    {
+      setIsMuted(true);
+    }
 
-  //   // Cleanup on unmount
-  //   // return () => {
-  //   //   synth.stop();
-  //   // };
-  // }, [data]);
+    function isMutedFalse()
+    {
+      setIsUpdating(false);
+    }
    function update_instrument_notes(changed_value)
    {
        setData(prev => ({...prev, notes: String(changed_value.target.value)}))
        function_to_add(data);
    }
   return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>Enjoy creating music with Strudel!</p>
-      <input type = 'text' id = {'notes for ' + data.name} onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value={data.notes}/>
+    
+    
+    <div className="card" style="width: 18rem;">
+      <div className="card-body">
+        <h5 className="card-title">Instrument Name: {data.name}</h5>
+        <p className = "card-text"> Current Composition: {data.notes} </p>
+        <textarea id = {'notes_for_' + data.name} className ='form-control' onChange = {(changed_value) => update_instrument_notes(changed_value.target.value)} value={data.notes}/>
+        <button type='button' className="btn btn-danger" onClick={delete_function(data)}>Go somewhere</button>
+      </div>
     </div>
   );
   };
