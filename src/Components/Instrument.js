@@ -39,7 +39,7 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
     <div className="card col-4" style={{width: "18rem;"}}>
       <div className="card-body">
         <h5 className="card-title">Instrument Name: {data.name}</h5>
-        <p className = "card-text"> Current Composition for : {data.strudelCode} </p>
+        <p className = "card-text"> Current Composition for {data.name}: {data.strudelCode} </p>
         <textarea id = {'notes_for_' + data.name} className ='form-control' onInput = {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/>
         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"></input>
         {/* <button type='button' className="btn btn-danger" onClick={delete_function(data)}>Go somewhere</button> */}

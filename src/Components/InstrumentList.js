@@ -67,17 +67,17 @@ export default function InstrumentList()
 
         
     }
-    // function remove_instrument(instrument_to_remove)
-    // {
-    //     update_instrument_list(prev_state => 
-    //         (
-    //             {
-    //                 ...prev_state, 
-    //                 instruments:  prev_state.instruments.filter((instrument) => instrument.name !== instrument_to_remove.name)
-    //             }
-    //         )
-    //     );
-    // }
+    function remove_instrument(instrument_to_remove)
+    {
+        update_instrument_list(prev_state => 
+            (
+                {
+                    ...prev_state, 
+                    instruments:  [prev_state.instruments.filter((instrument) => instrument.name !== instrument_to_remove.name)]
+                }
+            )
+        );
+    }
 
     function update_instrument_instance(new_instrument)
     {
@@ -151,7 +151,7 @@ export default function InstrumentList()
                 gain = {instrument.gain}
                 function_to_update={update_instrument_instance}
                 //TODO: create function for deleting an instrument
-                // delete_function={remove_instrument}
+                delete_function={remove_instrument}
                 />
            
             ))
