@@ -11,7 +11,7 @@ class InstrumentListObject
     
 }
 
-export default function InstrumentList()
+export default function InstrumentList({update_song_function})
 {
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,20 +28,15 @@ export default function InstrumentList()
     }
     //This function will be called anytime an instrument is updated, added or deleted. 
     function playableNotes()
-    {
-        
-            
+    {   
         var notes_to_play = ''
         instrument_list.instruments.map(instrument => 
             (
-            
             notes_to_play=  instrument.notes
-                
-
             )
 
         );
-        return notes_to_play
+        update_song_function(notes_to_play)
             
 
     }

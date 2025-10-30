@@ -1,13 +1,14 @@
 import './cors-redirect';
 import './App.css';
 import { initStrudel, note, hush, evalScope, getAudioContext, webaudioOutput, registerSynthSounds, initAudioOnFirstClick, transpiler } from "@strudel/web";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreProcessorControl from './Components/PreProcessorControl';
 import InstrumentList from './Components/InstrumentList';
+
 let globalEditor = null;
 
 const handleD3Data = (event) => {
@@ -63,35 +64,49 @@ export function ProcessText(match, ...args) {
 
 export default function StrudelDemo() {
 
-const hasRun = useRef(false);
+    const hasRun = useRef(false);
+    const [songText, setSongText] = useState('')
+    function update_song_text(new_song_text)
+    {
+        setSongText()
+    }
+    function play_song()
+    {
+        globalEditor.evaluate()
+    }
 
-useEffect(() => {
+    function stop_song()
+    {
+        globalEditor.stop()
+    }
 
-    if (!hasRun.current) {
-        document.addEventListener("d3Data", handleD3Data);
-        console_monkey_patch();
-        hasRun.current = true;
-        (async () => {
-            await initStrudel();
-            globalEditor = new StrudelMirror({
-                defaultOutput: webaudioOutput,
-                getTime: () => getAudioContext().currentTime,
-                transpiler,
-                root: document.getElementById('editor'),
-                prebake: async () => {
-                    initAudioOnFirstClick(); // needed to make the browser happy (don't await this here..)
-                    const loadModules = evalScope(
-                        import('@strudel/core'),
-                        import('@strudel/draw'),
-                        import('@strudel/mini'),
-                        import('@strudel/tonal'),
-                        import('@strudel/webaudio'),
-                    );
-                    await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
-                },
-            });
-            Proc()
-        })();
+    useEffect(() => {
+
+        if (!hasRun.current) {
+            document.addEventListener("d3Data", handleD3Data);
+            console_monkey_patch();
+            hasRun.current = true;
+            (async () => {
+                await initStrudel();
+                globalEditor = new StrudelMirror({
+                    defaultOutput: webaudioOutput,
+                    getTime: () => getAudioContext().currentTime,
+                    transpiler,
+                    root: document.getElementById('editor'),
+                    prebake: async () => {
+                        initAudioOnFirstClick(); // needed to make the browser happy (don't await this here..)
+                        const loadModules = evalScope(
+                            import('@strudel/core'),
+                            import('@strudel/draw'),
+                            import('@strudel/mini'),
+                            import('@strudel/tonal'),
+                            import('@strudel/webaudio'),
+                        );
+                        await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
+                    },
+                });
+                Proc()
+            })();
         document.getElementById('proc').value = stranger_tune
         SetupButtons()
     }
@@ -105,17 +120,20 @@ return (
         <main>
 
             <div className="container-fluid">
-                 <div className="row">
-                    <div className="col-md-4 bg-dark">
-
-                        
-                            <button id="process" className="btn btn-primary">Preprocess</button>
-                            <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
-                            <br />
-                            <button id="play" className="btn btn-outline-primary">Play</button>
-                            <button id="stop" className="btn btn-outline-primary">Stop</button>
-                        
+                 <div className="row justify-content-center">
+                    <div className="col-sm-3">
+                        <button id="process" className="btn btn-outline-primary">Preprocess</button>
                     </div>
+                    <div className="col-sm-3">
+                            <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
+                    </div>
+                    <div className="col-sm-3">
+                            <button id="play" className="btn btn-outline-primary">Play</button>
+                    </div>
+                    <div className="col-sm-3 ">
+                            <button id="stop" className="btn btn-outline-primary">Stop</button>
+                    </div>
+                          
                 </div>
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
