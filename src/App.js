@@ -68,7 +68,9 @@ export default function StrudelDemo() {
     const [songText, setSongText] = useState('')
     function update_song_text(new_song_text)
     {
-        setSongText()
+        console.log(new_song_text)
+        setSongText(new_song_text)
+        console.log("notes to play: " + songText)
     }
     function play_song()
     {
@@ -107,11 +109,13 @@ export default function StrudelDemo() {
                 });
                 Proc()
             })();
-        document.getElementById('proc').value = stranger_tune
+        //to delete Jose
+        // document.getElementById('proc').value = songText
         SetupButtons()
     }
+    console.log("Song text saved: " + songText)
 
-}, []);
+}, [songText]);
 
 
 return (
@@ -138,12 +142,12 @@ return (
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
-                        <textarea className="form-control" rows="1" id="proc" ></textarea>
+                        <textarea className="form-control" rows="1" id="proc" value={songText}></textarea>
                     </div>
                 </div>
                
                 <div className="row">
-                    <InstrumentList/>
+                    <InstrumentList update_song_function={update_song_text}/>
                 </div>
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>

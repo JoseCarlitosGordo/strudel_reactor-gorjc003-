@@ -16,7 +16,8 @@ export default function InstrumentList({update_song_function})
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [notes_to_play, setNotesToPlay] = useState('');
-
+    //when instrument_list is updated, run playableNotes, which will update notes to play and then call update_song_function
+    useEffect(() =>{playableNotes()}, [instrument_list])
     function openAddInstrument()
     {
     setIsModalOpen(true);
@@ -32,30 +33,28 @@ export default function InstrumentList({update_song_function})
         var notes_to_play = ''
         instrument_list.instruments.map(instrument => 
             (
-            notes_to_play=  instrument.notes
+            notes_to_play +=  instrument.strudelCode + "\n"
             )
 
         );
+       
         update_song_function(notes_to_play)
             
 
     }
-    //saves other states, but resets instrument_list to an empty list
+
     function clear_all()
     {
-        update_instrument_list(prev_state =>(
-            {
-            
-                ...prev_state, 
-                instruments: [],
+        update_instrument_list(()=>(
+            { 
+                instruments: []
             }));
     }
     function add_instrument(instrument)
     {
         
         update_instrument_list(prev_state => (
-        {
-            ...prev_state, 
+        { 
             instruments: [...prev_state.instruments, instrument]
         }));
        closeModal()
