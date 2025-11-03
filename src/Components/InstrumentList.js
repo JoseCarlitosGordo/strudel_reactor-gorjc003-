@@ -97,6 +97,18 @@ export default function InstrumentList({update_song_function})
         
     }
 
+    function save_to_storage()
+    {
+        var instruments_to_store =JSON.stringify(instrument_list);
+        localStorage.setItem("instrument_list", instruments_to_store)
+        alert("Your instruments have been stored. To load them, please press the load from storage button.")
+    }
+
+    function load_from_storage()
+    {
+        var instrument_replacement =localStorage.getItem("instrument_list")
+        update_instrument_list(Object.assign(new InstrumentListObject(), JSON.parse(instrument_replacement)))
+    }
     //todo: add logic to handle muting of an instrument within instrument object
     // function toggle_mute(muted_instrument)
     // {
@@ -127,7 +139,8 @@ export default function InstrumentList({update_song_function})
 
             <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
             <button type = 'button' onClick={clear_all}> Clear</button>
-        
+            <button type = 'button' onClick={save_to_storage}> Save to Storage</button>
+            <button type = 'button' onClick={load_from_storage}> Load from  Storage</button>
             {/* Display modal for creating new instrument */}
             {isModalOpen && (
                 <CreateInstrument function_to_add={add_instrument} />

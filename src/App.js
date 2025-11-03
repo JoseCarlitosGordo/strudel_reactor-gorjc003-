@@ -108,14 +108,14 @@ export default function StrudelDemo() {
                     },
                 });
                 Proc()
+                SetupButtons()
             })();
         //to delete Jose
         // document.getElementById('proc').value = songText
-        SetupButtons()
+    
     }
-    console.log("Song text saved: " + songText)
 
-}, [songText]);
+}, []);
 
 
 return (
