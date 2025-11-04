@@ -66,7 +66,7 @@ export default function InstrumentList({update_song_function})
         update_instrument_list(prev_state => 
             (
                 {
-                    ...prev_state, 
+                    
                     instruments:  [prev_state.instruments.filter((instrument) => instrument.name !== instrument_to_remove.name)]
                 }
             )
@@ -78,8 +78,7 @@ export default function InstrumentList({update_song_function})
         update_instrument_list
         (prev_list => (
         {
-            //gets previous state
-            ...prev_list, 
+            
             instruments:  prev_list.instruments.map(instrument =>
                 {
                     if(instrument.name == new_instrument.name)

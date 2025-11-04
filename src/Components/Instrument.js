@@ -39,8 +39,10 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
       {
         replace = "_"
       }
-       setData(prev => ({...prev, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}))
-       function_to_update(data);
+      const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}
+      // setData(prev => ({...prev, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}))
+      setData(newData)
+      function_to_update(newData);
    }
   return (
     
