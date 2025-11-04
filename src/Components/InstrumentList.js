@@ -109,31 +109,9 @@ export default function InstrumentList({update_song_function})
         var instrument_replacement =localStorage.getItem("instrument_list")
         update_instrument_list(Object.assign(new InstrumentListObject(), JSON.parse(instrument_replacement)))
     }
-    //todo: add logic to handle muting of an instrument within instrument object
-    // function toggle_mute(muted_instrument)
-    // {
-    //      update_instrument_list
-    //     (prev_list => (
-    //     {
-    //         //gets previous state
-    //         ...prev_list, 
-    //         instruments:  prev_list.instruments.map(instrument =>
-    //             {
-    //                 if(instrument.name == muted_instrument.name)
-    //                 {
-    //                     return {...instrument, ...muted_instrument};
-    //                 }
-    //                 else
-    //                 {
-    //                     return instrument;
-    //                 }
-    //             })
-    //     }));
-
-    // }
+  
     
 
-    
     return(
         <div>
 
