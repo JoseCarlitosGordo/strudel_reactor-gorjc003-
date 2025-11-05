@@ -123,8 +123,8 @@ export default function InstrumentList({update_song_function})
                 <CreateInstrument function_to_add={add_instrument} />
                
             )}
-            <div className = 'row justify-content-center bg-dark'>
-                <div className = 'col'>
+            <div className = 'row justify-content-center '>
+                <div className = 'col-6'>
                     
                 
             {
@@ -144,18 +144,18 @@ export default function InstrumentList({update_song_function})
             ))
             }
                 </div>
-                <div className = 'col-3'>
-                    <div className= 'row justify-content-center bg-dark '>
-                        <div className = 'col-6'>
+                <div className = 'col-3 bg-dark rounded-4'>
+                    <div className= 'row'>
+                        <div className = 'col-6 p-2'>
                             <button type = 'button' className='btn btn-primary'onClick={openAddInstrument}> Add Instrument</button>
                         </div>
-                        <div className = 'col-6'>
-                            <button type = 'button' className='btn btn-primary'onClick={clear_all}> Clear</button>
+                        <div className = 'col-6 p-2'>
+                            <button type = 'button' className='btn btn-primary'onClick={clear_all}> Clear Instruments</button>
                         </div>
-                        <div className = 'col-6'>
+                        <div className = 'col-6 p-2'>
                             <button type = 'button' className='btn btn-primary' onClick={save_to_storage}> Save to Storage</button>
                         </div>
-                        <div className = 'col-6'>
+                        <div className = 'col-6 p-2'>
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
                     </div>

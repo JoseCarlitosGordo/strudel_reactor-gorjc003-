@@ -44,24 +44,12 @@ export function ProcAndPlay() {
     }
 }
 
-//TODO: Change it so that Proc checks all Instrument preprocessor controls instead of just one
+
 export function Proc() {
-    //toDO: Replace this with a parameter that takes in the proc_text to be replaced
     let proc_text = document.getElementById('proc').value
-    let proc_text_replaced = proc_text.replaceAll('<p1_Radio>', ProcessText);
-   
-    globalEditor.setCode(proc_text_replaced)
+    globalEditor.setCode(proc_text)
 }
 
-export function ProcessText(match, ...args) {
-
-    let replace = ""
-    if (document.getElementById('flexRadioDefault2').checked) {
-        replace = "_"
-    }
-
-    return replace
-}
 
 export default function StrudelDemo() {
 
@@ -143,40 +131,16 @@ return (
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
                         <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
                     </div>
-                    <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                    <div className="col-4 md-8 p-4 bg-dark" style={{ maxHeight: '40vh', overflowY: 'auto' }}>
                         <div id="editor" />
                     </div>
                           
                 </div>
-                {/* <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
-                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
-                    </div>
-                </div> */}
                
-                <div className="row">
-                    <div className="col">
-                        <InstrumentList update_song_function={update_song_text}/>
-                    </div>
-                   
-                </div>
-                <div className="row">
-                    <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <div id="editor" />
-                    </div>
-                    {/* <div className="col-md-4">
-                         <PreProcessorControl
-                        text = "ON"
-                        element_id="flexRadioDefault1"
-                        default_check={true}/>
-                        <PreProcessorControl
-                        text = "HUSH"
-                        element_id="flexRadioDefault2"
-                        default_check={false}/>
-                        
-                    </div> */}
-                </div>
+             
+                <InstrumentList update_song_function={update_song_text}/>
+                    
+               
             </div>
 
         </main >

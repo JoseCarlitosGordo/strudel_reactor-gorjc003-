@@ -1,5 +1,5 @@
 import globalEditor, {Proc} from '../App'  
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 
 
@@ -24,13 +24,16 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
     //create a new instrument 
     const [data, setData] = useState(new Instrument(name, notes, gain));
     const [isMuted, setIsMuted] = useState(false)
-  
+    useEffect(() => 
+      {
+        update_instrument_notes(data.notes);
+      }, [isMuted]);
+
     function update_mute(e)
     {
       //updates mute state
       setIsMuted(e.target.checked);
       //calls update_instrument_notes with the same notes to ensure that only the replace text is updated
-      update_instrument_notes(data.notes);
     }
     function update_instrument_notes(changed_value)
    {
@@ -47,10 +50,10 @@ const InstrumentObject = ({name, notes, gain, function_to_update} ) =>
   return (
     
     
-    <div className="card col-4" style={{width: "18rem;"}}>
+    <div className="card col-5 bg-dark text-light" style={{width: "18rem;"}}>
       <div className="card-body">
         <h5 className="card-title">Instrument Name: {data.name}</h5>
-        <p className = "card-text"> Current Composition for {data.name}: <br/> {data.strudelCode} </p>
+        <label htmlFor={'notes_for_' + data.name}>Composition editor</label>
         <textarea id = {'notes_for_' + data.name} className ='form-control' onChange= {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/>
         <input type="checkbox" id={"mute_button_"+ data.name } checked={isMuted} onChange = {update_mute}></input>
         {/* <button type='button' className="btn btn-danger" onClick={delete_function(data)}>Go somewhere</button> */}
