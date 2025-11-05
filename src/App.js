@@ -8,6 +8,7 @@ import { stranger_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreProcessorControl from './Components/PreProcessorControl';
 import InstrumentList from './Components/InstrumentList';
+import PlayButtons from './Components/PlayButtons';
 
 let globalEditor = null;
 
@@ -18,8 +19,8 @@ const handleD3Data = (event) => {
 
 export function SetupButtons() {
 
-    document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
+    // document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
+    // document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
     document.getElementById('process').addEventListener('click', () => {
         Proc()
     }
@@ -131,29 +132,40 @@ return (
                     <div className="col-sm-3">
                             <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
                     </div>
-                    <div className="col-sm-3">
+                    {/* <div className="col-sm-3">
                             <button id="play" className="btn btn-outline-primary">Play</button>
                     </div>
                     <div className="col-sm-3 ">
                             <button id="stop" className="btn btn-outline-primary">Stop</button>
+                    </div> */}
+                    <PlayButtons play_function={play_song} stop_function={stop_song}/>
+                    <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
+                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
+                    </div>
+                    <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                        <div id="editor" />
                     </div>
                           
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
-                        <textarea className="form-control" rows="1" id="proc" value={songText}></textarea>
+                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
                     </div>
-                </div>
+                </div> */}
                
                 <div className="row">
-                    <InstrumentList update_song_function={update_song_text}/>
+                    <div className="col">
+                        <InstrumentList update_song_function={update_song_text}/>
+                    </div>
+                   
                 </div>
                 <div className="row">
                     <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <div id="editor" />
                     </div>
-                    <div className="col-md-4">
+                    {/* <div className="col-md-4">
                          <PreProcessorControl
                         text = "ON"
                         element_id="flexRadioDefault1"
@@ -163,7 +175,7 @@ return (
                         element_id="flexRadioDefault2"
                         default_check={false}/>
                         
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

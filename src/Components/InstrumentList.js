@@ -113,17 +113,20 @@ export default function InstrumentList({update_song_function})
 
     return(
         <div>
-
-            <button type = 'button' onClick={openAddInstrument}> Add Instrument</button>
-            <button type = 'button' onClick={clear_all}> Clear</button>
-            <button type = 'button' onClick={save_to_storage}> Save to Storage</button>
-            <button type = 'button' onClick={load_from_storage}> Load from  Storage</button>
+            
+           
+            
+            
+           
             {/* Display modal for creating new instrument */}
             {isModalOpen && (
                 <CreateInstrument function_to_add={add_instrument} />
                
             )}
-            <div className = 'row justify-content-center'>
+            <div className = 'row justify-content-center bg-dark'>
+                <div className = 'col'>
+                    
+                
             {
              instrument_list.instruments.map((instrument, index) => (
             //TODO: replace this placeholder div with the instrument.js component
@@ -140,6 +143,23 @@ export default function InstrumentList({update_song_function})
            
             ))
             }
+                </div>
+                <div className = 'col-3'>
+                    <div className= 'row justify-content-center bg-dark '>
+                        <div className = 'col-6'>
+                            <button type = 'button' className='btn btn-primary'onClick={openAddInstrument}> Add Instrument</button>
+                        </div>
+                        <div className = 'col-6'>
+                            <button type = 'button' className='btn btn-primary'onClick={clear_all}> Clear</button>
+                        </div>
+                        <div className = 'col-6'>
+                            <button type = 'button' className='btn btn-primary' onClick={save_to_storage}> Save to Storage</button>
+                        </div>
+                        <div className = 'col-6'>
+                            <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
