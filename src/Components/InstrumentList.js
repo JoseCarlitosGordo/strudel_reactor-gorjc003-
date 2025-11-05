@@ -15,8 +15,13 @@ export default function InstrumentList({update_song_function, proc_and_play_func
 {
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [tempo, setTempo] = useState(100)
     //when instrument_list is updated, run playableNotes, which will update notes to play and then call update_song_function
-    useEffect(() =>{playableNotes()}, [instrument_list])
+    useEffect(() =>{playableNotes(tempo)}, [instrument_list])
+    useEffect(() =>{
+        playableNotes(tempo);
+        proc_and_play_function()
+    }, [tempo])
     //open and closing modal for adding an instrument
     function openAddInstrument()
     {
@@ -28,9 +33,9 @@ export default function InstrumentList({update_song_function, proc_and_play_func
     }
 
     //This function will be called anytime an instrument is updated, added or deleted. 
-    function playableNotes()
+    function playableNotes(tempo)
     {   
-        var notes_to_play = ''
+        var notes_to_play = 'setcpm('+tempo+'); \n'
         instrument_list.instruments.map(instrument => 
             (
             notes_to_play +=  instrument.strudelCode + "\n"
@@ -161,6 +166,10 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                         <div className = 'col-6 p-2'>
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
+                         <div className = 'col p-2'>
+                            <input id = 'globalTempo'type='range' min = '0' max = '1000' value = {tempo} onInput = {e =>setTempo(e.target.value)}/>
+                        </div>
+
                     </div>
                 </div>
             </div>

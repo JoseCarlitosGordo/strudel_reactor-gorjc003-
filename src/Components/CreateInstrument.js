@@ -12,7 +12,7 @@ export default function CreateInstrument({function_to_add})
     const[name, setName] = useState('');
     const[notes, setNotes] = useState('');
     const[gain, setGain] = useState(0);
-   
+  
     return(
     <div className="modal-overlay">
           <div className="custom-modal-content">
