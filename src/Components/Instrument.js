@@ -19,21 +19,22 @@ export class Instrument
 
 //TODO: Implement mute button in here?
 
-const InstrumentObject = ({name, notes, gain, function_to_update} ) => 
+const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_state} ) => 
   {
     //create a new instrument 
     const [data, setData] = useState(new Instrument(name, notes, gain));
     const [isMuted, setIsMuted] = useState(false)
+    //run this change everytime isMuted is toggled (can be extended for other features such as sliders.)
     useEffect(() => 
       {
         update_instrument_notes(data.notes);
+        on_changed_state();
       }, [isMuted]);
 
     function update_mute(e)
     {
       //updates mute state
       setIsMuted(e.target.checked);
-      //calls update_instrument_notes with the same notes to ensure that only the replace text is updated
     }
     function update_instrument_notes(changed_value)
    {

@@ -96,12 +96,8 @@ export default function StrudelDemo() {
                         await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
                     },
                 });
-                Proc()
                 SetupButtons()
             })();
-        //to delete Jose
-        // document.getElementById('proc').value = songText
-    
     }
 
 }, []);
@@ -120,13 +116,7 @@ return (
                     <div className="col-sm-3">
                             <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
                     </div>
-                    {/* <div className="col-sm-3">
-                            <button id="play" className="btn btn-outline-primary">Play</button>
-                    </div>
-                    <div className="col-sm-3 ">
-                            <button id="stop" className="btn btn-outline-primary">Stop</button>
-                    </div> */}
-                    <PlayButtons play_function={play_song} stop_function={stop_song}/>
+                        <PlayButtons play_function={play_song} stop_function={stop_song}/>
                     <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                         <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
                         <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
@@ -138,7 +128,10 @@ return (
                 </div>
                
              
-                <InstrumentList update_song_function={update_song_text}/>
+                <InstrumentList 
+                update_song_function={update_song_text}
+                proc_and_play_function = {ProcAndPlay}
+                />
                     
                
             </div>

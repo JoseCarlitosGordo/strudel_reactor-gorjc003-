@@ -11,22 +11,22 @@ class InstrumentListObject
     
 }
 
-export default function InstrumentList({update_song_function})
+export default function InstrumentList({update_song_function, proc_and_play_function })
 {
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [notes_to_play, setNotesToPlay] = useState('');
     //when instrument_list is updated, run playableNotes, which will update notes to play and then call update_song_function
     useEffect(() =>{playableNotes()}, [instrument_list])
+    //open and closing modal for adding an instrument
     function openAddInstrument()
     {
     setIsModalOpen(true);
     }
-
     function  closeModal()
     {
     setIsModalOpen(false);
     }
+
     //This function will be called anytime an instrument is updated, added or deleted. 
     function playableNotes()
     {   
@@ -42,7 +42,7 @@ export default function InstrumentList({update_song_function})
             
 
     }
-
+    //function for clearing entire list of instruments
     function clear_all()
     {
         update_instrument_list(()=>(
@@ -50,6 +50,7 @@ export default function InstrumentList({update_song_function})
                 instruments: []
             }));
     }
+    //once instrument from modal is confirmed, close Modal and append it to the instrument list
     function add_instrument(instrument)
     {
         
@@ -61,6 +62,7 @@ export default function InstrumentList({update_song_function})
 
         
     }
+    //removing an instrument by filtering out the ones that are equal to the instrument to remove (yet to be properly implemented )
     function remove_instrument(instrument_to_remove)
     {
         update_instrument_list(prev_state => 
@@ -72,7 +74,7 @@ export default function InstrumentList({update_song_function})
             )
         );
     }
-
+    //change the strudel code of a specific instrument within the list
     function update_instrument_instance(new_instrument)
     {
         update_instrument_list
@@ -95,14 +97,14 @@ export default function InstrumentList({update_song_function})
         
         
     }
-
+    //JSON handling and saving to local storage
     function save_to_storage()
     {
         var instruments_to_store =JSON.stringify(instrument_list);
         localStorage.setItem("instrument_list", instruments_to_store)
         alert("Your instruments have been stored. To load them, please press the load from storage button.")
     }
-
+    
     function load_from_storage()
     {
         var instrument_replacement =localStorage.getItem("instrument_list")
@@ -129,7 +131,7 @@ export default function InstrumentList({update_song_function})
                 
             {
              instrument_list.instruments.map((instrument, index) => (
-            //TODO: replace this placeholder div with the instrument.js component
+            //Loop over every instrument in instrument_list and create a new InstrumentObject with it
         
            
                 <InstrumentObject 
@@ -139,6 +141,7 @@ export default function InstrumentList({update_song_function})
                 function_to_update={update_instrument_instance}
                 //TODO: create function for deleting an instrument
                 delete_function={remove_instrument}
+                on_changed_state = {proc_and_play_function}
                 />
            
             ))

@@ -13,7 +13,6 @@ export default function CreateInstrument({function_to_add})
     const[notes, setNotes] = useState('');
     const[gain, setGain] = useState(0);
    
-    //TODO: replace text with input fields and find a way to have this reflect back on instrument.js as well as strudel's REPL
     return(
     <div className="modal-overlay">
           <div className="custom-modal-content">
