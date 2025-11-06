@@ -51,7 +51,7 @@ const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_sta
   return (
     
     
-    <div className="card col-5 bg-dark text-light" style={{width: "18rem;"}}>
+    <div className="card col-5 bg-dark text-light m-3" style={{width: "18rem;"}}>
       <div className="card-body">
         <h5 className="card-title">Instrument Name: {data.name}</h5>
         <label htmlFor={'notes_for_' + data.name}>Composition editor</label>

@@ -133,24 +133,25 @@ export default function InstrumentList({update_song_function, proc_and_play_func
             <div className = 'row justify-content-center '>
                 <div className = 'col-6'>
                     
+                    <div className = 'row'>
+                    {
+                    instrument_list.instruments.map((instrument, index) => (
+                    //Loop over every instrument in instrument_list and create a new InstrumentObject with it
+                        
                 
-            {
-             instrument_list.instruments.map((instrument, index) => (
-            //Loop over every instrument in instrument_list and create a new InstrumentObject with it
-        
-           
-                <InstrumentObject 
-                name= {instrument.name}
-                notes = {instrument.notes}
-                gain = {instrument.gain}
-                function_to_update={update_instrument_instance}
-                //TODO: create function for deleting an instrument
-                delete_function={remove_instrument}
-                on_changed_state = {proc_and_play_function}
-                />
-           
-            ))
-            }
+                        <InstrumentObject 
+                        name= {instrument.name}
+                        notes = {instrument.notes}
+                        gain = {instrument.gain}
+                        function_to_update={update_instrument_instance}
+                        //TODO: create function for deleting an instrument
+                        delete_function={remove_instrument}
+                        on_changed_state = {proc_and_play_function}
+                        />
+                
+                    ))
+                    }
+                    </div>
                 </div>
                 <div className = 'col-3 bg-dark rounded-4'>
                     <div className= 'row'>
