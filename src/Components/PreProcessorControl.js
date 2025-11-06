@@ -1,12 +1,14 @@
 import { ProcAndPlay } from "../App"
-export default function PreProcessorControl({text, element_id, default_check})
+export default function PreProcessorButtons({proc, proc_and_play})
 {
     return(
-        <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" id={element_id} onChange={ProcAndPlay} defaultChecked = {default_check}/>
-            <label className="form-check-label" htmlFor={element_id}>
-                p1: {text}
-            </label>
-        </div>
+       <>
+            <div className="col-sm-3">
+                <button id="process" className="btn btn-outline-primary" onClick={proc}>Preprocess</button>
+            </div>
+            <div className="col-sm-3">
+                <button id="process_play" className="btn btn-outline-primary" onClick={proc_and_play}>Proc & Play</button>
+            </div>
+       </>
     )
 }
