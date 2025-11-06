@@ -17,8 +17,6 @@ export class Instrument
 
 }
 
-//TODO: Implement mute button in here?
-
 const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_state} ) => 
   {
     //create a new instrument 
