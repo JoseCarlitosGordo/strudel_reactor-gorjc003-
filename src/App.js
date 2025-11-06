@@ -52,9 +52,6 @@ export default function StrudelDemo() {
         globalEditor.evaluate();
     }
     }
-
-
-
     useEffect(() => {
 
         if (!hasRun.current) {
@@ -92,7 +89,7 @@ return (
         <main>
 
             <div className="container-fluid">
-                 <div className="row justify-content-center pb-3">
+                 <div className="row justify-content-center mb-3 mx-auto bg-dark">
                         <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
                         <PlayButtons play_function={play_song} stop_function={stop_song}/>
                 </div>
@@ -101,7 +98,7 @@ return (
                         <label className="form-label text-center text-light">Text to preprocess:</label>
                         <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
                     </div>
-                    <div className="col-6 mx-3 bg-dark" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+                    <div className="col-4 mx-3 bg-dark rounded-3" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                         <div id="editor" />
                     </div>  
                 </div>         

@@ -44,7 +44,6 @@ const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_sta
         replace = "_"
       }
       const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}
-      // setData(prev => ({...prev, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}))
       setData(newData)
       function_to_update(newData);
    }
@@ -56,14 +55,10 @@ const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_sta
         <h5 className="card-title">Instrument Name: {data.name}</h5>
         <label htmlFor={'notes_for_' + data.name}>Composition editor</label>
         <textarea id = {'notes_for_' + data.name} className ='form-control' onChange= {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/>
-        <input type="checkbox" id={"mute_button_"+ data.name } checked={isMuted} onChange = {update_mute}></input>
+        <input type="checkbox" id={"mute_button_"+ data.name } checked={isMuted} onChange = {update_mute}/>
         {/* <button type='button' className="btn btn-danger" onClick={delete_function(data)}>Go somewhere</button> */}
       </div>
     </div>
   );
   };
 export default InstrumentObject;
-
-//TODO: IN return statement, have it display input fields for updating the values of notes and gain.
-// onChange={(e) =>
-//     setData(prev => ({ ...prev, frequency: Number(e.target.value) }))
