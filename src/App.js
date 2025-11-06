@@ -84,7 +84,7 @@ export default function StrudelDemo() {
 
 
 return (
-    <div className='bg-secondary'>
+    <div>
         <h2 className= 'text-center bg-dark text-light pb-3'>Strudel Demo</h2>
         <main>
 
@@ -94,11 +94,24 @@ return (
                         <PlayButtons play_function={play_song} stop_function={stop_song}/>
                 </div>
                 <div className="row justify-content-center pb-3">
-                    <div className="col-4 mx-3 bg-dark rounded-3" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <label className="form-label text-center text-light">Text to preprocess:</label>
-                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
+                    <div className="col-4 Accordion mx-3" id = "accordion_preprocess" >
+                        {/* <label className="form-label text-center text-light">Text to preprocess:</label>
+                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea> */}
+                         <div className="accordion-item bg-secondary">
+                            <h2 className="accordion-header">
+                                <button className="accordion-button text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
+                                    Text to preprocess: (click here to expand and close!)
+                                </button>
+                            </h2>
+                            <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordion_preprocess">
+                            <div className="accordion-body">
+                                <textarea className="form-control bg-dark text-light" rows="10" id="proc" value={songText}></textarea> 
+                            </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div className="col-4 mx-3 bg-dark rounded-3" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+                    <div className="col-4 mx-3 bg-dark rounded-3" >
                         <div id="editor" />
                     </div>  
                 </div>         
@@ -109,9 +122,22 @@ return (
                 /> 
             </div>
         </main >
+        
     </div >
 );
 
 
 }
 
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div className="accordion-body">
+        <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>

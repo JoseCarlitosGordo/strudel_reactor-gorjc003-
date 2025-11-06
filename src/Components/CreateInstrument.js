@@ -16,8 +16,7 @@ export default function CreateInstrument({function_to_add})
     return(
     <div className="modal-overlay">
           <div className="custom-modal-content">
-            <h2>Modal Title</h2>
-            <p>This is the modal content.</p>
+            <h2>Instrument Creation</h2>
             <input type='text' placeholder="Enter the name of your instrument here" onInput = {e =>setName(e.target.value)}/>
              <textarea rows={5} placeholder="Enter the composition of your instrument here" onInput = {e =>setNotes(e.target.value)}/>
              <label htmlFor='gain'><p> Gain slider</p></label> 

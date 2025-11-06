@@ -167,7 +167,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
                          <div className = 'col p-2'>
-                            <input id = 'globalTempo'type='range' min = '0' max = '1000' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value)}}/>
+                            <input type='range' className = 'form-range' min = '0' max = '1000' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value)}}/>
                         </div>
 
                     </div>
