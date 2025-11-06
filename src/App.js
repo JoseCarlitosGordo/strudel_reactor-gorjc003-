@@ -16,41 +16,6 @@ const handleD3Data = (event) => {
     console.log(event.detail);
 };
 
-
-export function SetupButtons() {
-
-    // document.getElementById('play').addEventListener('click', () => globalEditor.evaluate());
-    // document.getElementById('stop').addEventListener('click', () => globalEditor.stop());
-    // document.getElementById('process').addEventListener('click', () => {
-    //     Proc()
-    // }
-    // )
-    // document.getElementById('process_play').addEventListener('click', () => {
-    //     if (globalEditor != null) {
-    //         Proc()
-    //         globalEditor.evaluate()
-    //     }
-    // }
-    // )
-}
-
-
-
-// export function ProcAndPlay() {
-//     if (globalEditor != null && globalEditor.repl.state.started == true) {
-//         console.log(globalEditor)
-//         Proc()
-//         globalEditor.evaluate();
-//     }
-// }
-
-
-// export function Proc() {
-//     let proc_text = document.getElementById('proc').value
-//     globalEditor.setCode(proc_text)
-// }
-
-
 export default function StrudelDemo() {
 
     const hasRun = useRef(false);
@@ -77,7 +42,7 @@ export default function StrudelDemo() {
     }
     function process_and_play()
     {
-        if (globalEditor != null && globalEditor.repl.state.started == true) {
+        if (globalEditor != null) {
         console.log(globalEditor)
         process()
         globalEditor.evaluate();
@@ -111,7 +76,6 @@ export default function StrudelDemo() {
                         await Promise.all([loadModules, registerSynthSounds(), registerSoundfonts()]);
                     },
                 });
-                SetupButtons()
             })();
     }
 
@@ -125,12 +89,6 @@ return (
 
             <div className="container-fluid">
                  <div className="row justify-content-center">
-                    {/* <div className="col-sm-3">
-                        <button id="process" className="btn btn-outline-primary">Preprocess</button>
-                    </div>
-                    <div className="col-sm-3">
-                            <button id="process_play" className="btn btn-outline-primary">Proc & Play</button>
-                    </div> */}
                         <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
                         <PlayButtons play_function={play_song} stop_function={stop_song}/>
                     <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
@@ -139,19 +97,13 @@ return (
                     </div>
                     <div className="col-4 md-8 p-4 bg-dark" style={{ maxHeight: '40vh', overflowY: 'auto' }}>
                         <div id="editor" />
-                    </div>
-                          
+                    </div>           
                 </div>
-               
-             
                 <InstrumentList 
                 update_song_function={update_song_text}
                 proc_and_play_function = {process_and_play}
-                />
-                    
-               
+                /> 
             </div>
-
         </main >
     </div >
 );
