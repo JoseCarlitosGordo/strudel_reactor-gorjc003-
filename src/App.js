@@ -20,26 +20,30 @@ export default function StrudelDemo() {
 
     const hasRun = useRef(false);
     const [songText, setSongText] = useState('')
+    //whenever a change in instrument list is called, update preprocessed text
     function update_song_text(new_song_text)
     {
         console.log(new_song_text)
         setSongText(new_song_text)
         console.log("notes to play: " + songText)
     }
+    //play song button
     function play_song()
     {
         globalEditor.evaluate()
     }
-
+    //stop song button 
     function stop_song()
     {
         globalEditor.stop()
     }
+    //proc button
     function process()
     {
         let proc_text = document.getElementById('proc').value
         globalEditor.setCode(proc_text)
     }
+    //proc_and_play button 
     function process_and_play()
     {
         if (globalEditor != null) {
@@ -83,22 +87,25 @@ export default function StrudelDemo() {
 
 
 return (
-    <div>
-        <h2>Strudel Demo</h2>
+    <div className='bg-secondary'>
+        <h2 className= 'text-center bg-dark text-light pb-3'>Strudel Demo</h2>
         <main>
 
             <div className="container-fluid">
-                 <div className="row justify-content-center">
+                 <div className="row justify-content-center pb-3">
                         <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
                         <PlayButtons play_function={play_song} stop_function={stop_song}/>
-                    <div className="col-4 md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Text to preprocess:</label>
+                </div>
+                <div className="row justify-content-center pb-3">
+                    <div className="col-4 mx-3 bg-dark rounded-3" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                        <label className="form-label text-center text-light">Text to preprocess:</label>
                         <textarea className="form-control" rows="10" id="proc" value={songText}></textarea>
                     </div>
-                    <div className="col-4 md-8 p-4 bg-dark" style={{ maxHeight: '40vh', overflowY: 'auto' }}>
+                    <div className="col-6 mx-3 bg-dark" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                         <div id="editor" />
-                    </div>           
-                </div>
+                    </div>  
+                </div>         
+                
                 <InstrumentList 
                 update_song_function={update_song_text}
                 proc_and_play_function = {process_and_play}
