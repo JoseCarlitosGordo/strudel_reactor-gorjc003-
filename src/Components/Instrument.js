@@ -5,39 +5,40 @@ import {useState, useEffect} from 'react'
 
 export class Instrument
 {
-  constructor(name, notes, gain)
+  constructor(name, notes)
   {
     this.name = name;
     this.notes = notes
     this.strudelCode = this.name + ': ' + this.notes + '.log();'
-    this.gain = gain;
+   
     
   }
   
 
 }
 
-const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_state} ) => 
+const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) => 
   {
     //create a new instrument 
-    const [data, setData] = useState(new Instrument(name, notes, gain));
+    const [data, setData] = useState(new Instrument(name, notes, ));
     const [isMuted, setIsMuted] = useState(false)
-    //run this change everytime isMuted is toggled (can be extended for other features such as sliders.)
-    useEffect(() => 
+    //run this change everytime isMuted is toggled
+     useEffect(() => 
       {
-        update_instrument_notes(data.notes);
-        on_changed_state();
+        update_instrument_notes(data.notes, isMuted);
+        proc_and_play();
       }, [isMuted]);
 
     function update_mute(e)
     {
       //updates mute state
       setIsMuted(e.target.checked);
+
     }
-    function update_instrument_notes(changed_value)
+    function update_instrument_notes(changed_value, muted = isMuted)
    {
       let replace = ""
-      if (isMuted)
+      if (muted)
       {
         replace = "_"
       }

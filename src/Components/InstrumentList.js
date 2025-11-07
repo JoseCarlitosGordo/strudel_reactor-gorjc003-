@@ -142,10 +142,9 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                         <InstrumentObject 
                         name= {instrument.name}
                         notes = {instrument.notes}
-                        gain = {instrument.gain}
                         function_to_update={update_instrument_instance}
                         delete_function={remove_instrument}
-                        on_changed_state = {proc_and_play_function}
+                        proc_and_play = {proc_and_play_function}
                         />
                 
                     ))

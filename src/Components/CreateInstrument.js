@@ -6,7 +6,7 @@ export default function CreateInstrument({function_to_add})
 
     function create_instrument()
     {
-        const new_instrument = new Instrument(name, notes, gain)
+        const new_instrument = new Instrument(name, notes)
         function_to_add(new_instrument);
     }
     const[name, setName] = useState('');
@@ -18,7 +18,6 @@ export default function CreateInstrument({function_to_add})
   .lpenv(perlin.slow(3).range(1, 4))
   .lpf(perlin.slow(2).range(100, 2000))
   .gain(0.3)`);
-    const[gain, setGain] = useState(0);
   
     return(
     <div className="modal-overlay">
@@ -39,7 +38,6 @@ export default function CreateInstrument({function_to_add})
               <option value='"<a1 e2>/8".clip(0.8).struct("x*8").s("supersaw").note()'>Bass</option>
             </select>
              <label htmlFor='gain'><p> Gain slider</p></label> 
-             <input id = 'gain'type='range' min = '0' max = '100' value = {gain} onInput = {e =>setGain(e.target.value)}/>
             <button id ="modal_button" onClick={create_instrument}>Create Instrument</button>
           </div>
     </div>
