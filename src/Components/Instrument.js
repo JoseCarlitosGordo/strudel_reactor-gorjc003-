@@ -23,16 +23,18 @@ const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) =>
     const [data, setData] = useState(new Instrument(name, notes, ));
     const [isMuted, setIsMuted] = useState(false)
     //run this change everytime isMuted is toggled
-     useEffect(() => 
-      {
-        update_instrument_notes(data.notes, isMuted);
-        proc_and_play();
-      }, [isMuted]);
+    //  useEffect(() => 
+    //   {
+    //     update_instrument_notes(data.notes, isMuted);
+    //     proc_and_play();
+    //   }, [isMuted]);
 
     function update_mute(e)
     {
       //updates mute state
       setIsMuted(e.target.checked);
+      update_instrument_notes(data.notes, e.target.checked);
+      proc_and_play();  // now uses the updated mute state
 
     }
     function update_instrument_notes(changed_value, muted = isMuted)

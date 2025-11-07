@@ -24,9 +24,7 @@ export default function StrudelDemo() {
     //whenever a change in instrument list is called, update preprocessed text
     function update_song_text(new_song_text)
     {
-        console.log(new_song_text)
         setSongText(new_song_text)
-        console.log("notes to play: " + songText)
     }
     //play song button
     function play_song()
