@@ -12,6 +12,7 @@ import PlayButtons from './Components/PlayButtons';
 
 let globalEditor = null;
 
+//this function logs the musical notes played to the 
 const handleD3Data = (event) => {
     console.log(event.detail);
 };
@@ -89,37 +90,50 @@ return (
         <main>
 
             <div className="container-fluid">
-                 <div className="row justify-content-center mb-3 mx-auto bg-dark">
+                 {/* <div className="row justify-content-center mb-3 mx-auto bg-dark">
                         <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
                         <PlayButtons play_function={play_song} stop_function={stop_song}/>
-                </div>
-                <div className="row justify-content-center pb-3">
-                    <div className="col-4 Accordion mx-3" id = "accordion_preprocess" >
+                </div> */}
+                <div className="row justify-content-center align-items-start pb-3">
+                    <div className = "col-4 bg-dark m-2">
+                        <div className="row bg-dark">
+                            <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
+                            <PlayButtons play_function={play_song} stop_function={stop_song}/>
+                        </div> 
+                    </div>
+                    <InstrumentList 
+                        update_song_function={update_song_text}
+                        proc_and_play_function = {process_and_play}
+                    /> 
+                    <div className="col-4 accordion mx-3" id = "accordion_preprocess" >
                         {/* <label className="form-label text-center text-light">Text to preprocess:</label>
                         <textarea className="form-control" rows="10" id="proc" value={songText}></textarea> */}
-                         <div className="accordion-item bg-secondary">
+                         <div className="accordion-item">
                             <h2 className="accordion-header">
-                                <button className="accordion-button text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
-                                    Text to preprocess: (click here to expand and close!)
+                                <button className="accordion-button bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
+                                    Text to preprocess
                                 </button>
                             </h2>
                             <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordion_preprocess">
-                            <div className="accordion-body">
+                            <div className="accordion-body bg-secondary">
                                 <textarea className="form-control bg-dark text-light" rows="10" id="proc" value={songText}></textarea> 
                             </div>
                             </div>
                         </div>
                         
                     </div>
+                </div>
+                <div className="row justify-content-center pb-3">
+                    
                     <div className="col-4 mx-3 bg-dark rounded-3" >
                         <div id="editor" />
                     </div>  
                 </div>         
                 
-                <InstrumentList 
+                {/* <InstrumentList 
                 update_song_function={update_song_text}
                 proc_and_play_function = {process_and_play}
-                /> 
+                />  */}
             </div>
         </main >
         

@@ -9,7 +9,7 @@ export class Instrument
   {
     this.name = name;
     this.notes = notes
-    this.strudelCode = '<'+this.name+'_radio>'+ this.name + ': ' + notes
+    this.strudelCode = this.name + ': ' + this.notes + '.log();'
     this.gain = gain;
     
   }
@@ -41,7 +41,7 @@ const InstrumentObject = ({name, notes, gain, function_to_update, on_changed_sta
       {
         replace = "_"
       }
-      const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value}
+      const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value + '.log();' } 
       setData(newData)
       function_to_update(newData);
    }
