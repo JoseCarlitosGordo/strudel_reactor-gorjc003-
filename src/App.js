@@ -12,7 +12,7 @@ import PlayButtons from './Components/PlayButtons';
 
 let globalEditor = null;
 
-//this function logs the musical notes played to the 
+//this function logs the musical notes played to the console
 const handleD3Data = (event) => {
     console.log(event.detail);
 };
@@ -39,7 +39,7 @@ export default function StrudelDemo() {
     //proc button
     function process()
     {
-        let proc_text = document.getElementById('proc').value
+        let proc_text = songText
         globalEditor.setCode(proc_text)
     }
     //proc_and_play button 
@@ -88,10 +88,6 @@ return (
         <main>
 
             <div className="container-fluid">
-                 {/* <div className="row justify-content-center mb-3 mx-auto bg-dark">
-                        <PreProcessorButtons proc={process} proc_and_play={process_and_play}/>
-                        <PlayButtons play_function={play_song} stop_function={stop_song}/>
-                </div> */}
                 <div className="row justify-content-center align-items-start pb-3">
                     <div className = "col-4 bg-dark m-2">
                         <div className="row bg-dark">
