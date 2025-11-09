@@ -1,4 +1,3 @@
-import globalEditor, {Proc} from '../App'  
 import {useState, useEffect} from 'react'
 
 
@@ -63,3 +62,4 @@ const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) =>
   );
   };
 export default InstrumentObject;
+

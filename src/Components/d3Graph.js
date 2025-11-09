@@ -1,10 +1,13 @@
-import { getD3Data } from "../console-monkey-patch";
+import { getD3Data, subscribe, unsubscribe } from "../console-monkey-patch";
+import { useState, useEffect } from "react";
 import * as d3 from "d3"
 
-export default function graph()
+export default function D3Graph()
 {
     const [graphData, setData] = useState([])
 
+    //useEffect essential to remount and unmount the subscribing event on rerender/updates, 
+    //allowing for graphData to be updated
     useEffect(() =>
     {
         //set initial value of graph data.
@@ -14,6 +17,7 @@ export default function graph()
         function update_graph(event)
         {
             const incoming_data = event.detail
+            console.log("THIS SHIT ACtUALLY WORKS: " + incoming_data)
             setData(incoming_data.map(item => logToNum(item)))
         }
          //when the component is mounted, subscribe to d3Data event and map it to update_graph to 
@@ -23,6 +27,7 @@ export default function graph()
 
     }, [])
 
+    //useffect for creating graph logic
     useEffect(() =>
     {
         const svg = d3.select('svg')
@@ -38,7 +43,7 @@ export default function graph()
 
         let yScale = d3.scaleLinear()
         //8000 is the max possible value for pitch (it's an arbitrary number)
-            .domain(0, 8000)
+            .domain([0, 100])
             .range([h, 0])
 
         
@@ -68,7 +73,7 @@ export default function graph()
     
     function logToNum(input)
     {
-        letters = {'C': 0,  'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
+        let letters = {'C': 0,  'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
         if (!input) {return 0};
         var stringArray  = input.split(/(\s+)/)
         for(const item of stringArray)
@@ -76,7 +81,7 @@ export default function graph()
             if(item.startsWith('note:'))
             {
                 let val = item.substring(5)
-                midi_number = 12 +(12 * parseInt(val[1])) + letters[val[0].toUpperCase()] 
+                let midi_number = 12 +(12 * parseInt(val[1])) + letters[val[0].toUpperCase()] 
                 return midi_number
             }
         }

@@ -1,4 +1,4 @@
-import { ProcAndPlay } from "../App"
+
 export default function PreProcessorButtons({proc, proc_and_play})
 {
     return(

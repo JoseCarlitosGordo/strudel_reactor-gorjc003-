@@ -9,7 +9,7 @@ import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreProcessorButtons from './Components/PreProcessorControl';
 import InstrumentList from './Components/InstrumentList';
 import PlayButtons from './Components/PlayButtons';
-
+import D3Graph from './Components/d3Graph';
 let globalEditor = null;
 
 //this function logs the musical notes played to the console
@@ -21,6 +21,7 @@ export default function StrudelDemo() {
 
     const hasRun = useRef(false);
     const [songText, setSongText] = useState('')
+    const hasProcessed = useRef(false)
     //whenever a change in instrument list is called, update preprocessed text
     function update_song_text(new_song_text)
     {
@@ -29,7 +30,17 @@ export default function StrudelDemo() {
     //play song button
     function play_song()
     {
-        globalEditor.evaluate()
+        if(!hasProcessed.current)
+        {
+            alert("Cannot play as no initial text has been preprocessed.")
+        }
+        else
+        {
+            globalEditor.evaluate()
+        }
+        
+        
+        
     }
     //stop song button 
     function stop_song()
@@ -41,6 +52,7 @@ export default function StrudelDemo() {
     {
         let proc_text = songText
         globalEditor.setCode(proc_text)
+        hasProcessed.current= true;
     }
     //proc_and_play button 
     function process_and_play()
@@ -100,8 +112,6 @@ return (
                         proc_and_play_function = {process_and_play}
                     /> 
                     <div className="col-4 accordion mx-3" id = "accordion_preprocess" >
-                        {/* <label className="form-label text-center text-light">Text to preprocess:</label>
-                        <textarea className="form-control" rows="10" id="proc" value={songText}></textarea> */}
                          <div className="accordion-item">
                             <h2 className="accordion-header">
                                 <button className="accordion-button bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
@@ -122,13 +132,15 @@ return (
                     <div className="col-4 mx-3 bg-dark rounded-3" >
                         <div id="editor" />
                     </div>  
-                </div>         
+                </div>   
+                <D3Graph />      
                 
                 {/* <InstrumentList 
                 update_song_function={update_song_text}
                 proc_and_play_function = {process_and_play}
                 />  */}
             </div>
+            
         </main >
         
     </div >
@@ -137,15 +149,4 @@ return (
 
 }
 
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div className="accordion-body">
-        <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
+  
