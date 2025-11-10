@@ -41,8 +41,9 @@ export default function D3Graph()
         const barMargin = 10;
         const barWidth = w/graphData.length;
 
+        //y axis setup
         let yScale = d3.scaleLinear()
-        //8000 is the max possible value for pitch (it's an arbitrary number)
+        //100 is the max possible value for pitch (it's an arbitrary number)
             .domain([0, 100])
             .range([h, 0])
 
@@ -56,7 +57,7 @@ export default function D3Graph()
         //Actual data shit goes here
         chartGroup.append('path')
             .datum(graphData)
-            .attr('fill', 'none')
+            .attr('fill', 'white')
             .attr('stroke', 'steelblue')
             .attr('stroke-width', 1.5)
             .attr('d', d3.line()
@@ -88,8 +89,9 @@ export default function D3Graph()
 
     }
     return(
-       <div className = 'col'>
-            <svg width= '50%' height = '200px' className = 'border border-primary p-2'></svg> 
+       <div>
+            <label htmlFor="graph"> <h1 className = 'text-light'>Pitch level</h1></label>
+            <svg width= '100%' id = 'graph' height = '200px' className = 'border border-primary text-light p-2'></svg> 
        </div>
     )
 }

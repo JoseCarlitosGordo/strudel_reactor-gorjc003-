@@ -4,12 +4,12 @@ import { initStrudel, note, hush, evalScope, getAudioContext, webaudioOutput, re
 import { useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
 import { registerSoundfonts } from '@strudel/soundfonts';
-import { stranger_tune } from './tunes';
-import console_monkey_patch, { getD3Data } from './console-monkey-patch';
+import console_monkey_patch from './console-monkey-patch';
 import PreProcessorButtons from './Components/PreProcessorControl';
 import InstrumentList from './Components/InstrumentList';
 import PlayButtons from './Components/PlayButtons';
 import D3Graph from './Components/d3Graph';
+import ProcComponent from './Components/procComponent';
 let globalEditor = null;
 
 //this function logs the musical notes played to the console
@@ -111,7 +111,7 @@ return (
                         update_song_function={update_song_text}
                         proc_and_play_function = {process_and_play}
                     /> 
-                    <div className="col-4 accordion mx-3" id = "accordion_preprocess" >
+                    {/* <div className="col-4 accordion mx-3" id = "accordion_preprocess" >
                          <div className="accordion-item">
                             <h2 className="accordion-header">
                                 <button className="accordion-button bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
@@ -119,30 +119,25 @@ return (
                                 </button>
                             </h2>
                             <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordion_preprocess">
-                            <div className="accordion-body bg-secondary">
-                                <textarea className="form-control bg-dark text-light" rows="10" id="proc" value={songText}></textarea> 
+                                <div className="accordion-body bg-secondary">
+                                    <textarea className="form-control bg-dark text-light" rows="10" id="proc" value={songText}></textarea> 
+                                </div>
                             </div>
-                            </div>
-                        </div>
-                        
-                    </div>
+                        </div>   
+                    </div> */}
+                    <ProcComponent songText = {songText}/>
                 </div>
                 <div className="row justify-content-center pb-3">
                     
                     <div className="col-4 mx-3 bg-dark rounded-3" >
                         <div id="editor" />
                     </div>  
-                </div>   
-                <D3Graph />      
-                
-                {/* <InstrumentList 
-                update_song_function={update_song_text}
-                proc_and_play_function = {process_and_play}
-                />  */}
-            </div>
-            
-        </main >
-        
+                     <div className="col mx-3 bg-dark rounded-3" >
+                        <D3Graph /> 
+                    </div>     
+                </div>     
+            </div>     
+        </main >  
     </div >
 );
 
