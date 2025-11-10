@@ -20,7 +20,7 @@
   max-width: 500px;
   width: 90%;
 }
-input[type=text], #modal_button{
+input[type=text], #modal_button, #close_button {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -29,6 +29,7 @@ input[type=text], #modal_button{
   border-radius: 4px;
   box-sizing: border-box;
 }
+
 
 textarea{
   width: 100%;

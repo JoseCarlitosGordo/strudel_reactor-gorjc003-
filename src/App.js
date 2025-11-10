@@ -47,17 +47,41 @@ export default function StrudelDemo() {
     {
         globalEditor.stop()
     }
-    //proc button
+    //proc button, sets proc_text for any changes within the composition that aren't muting or unmuting
     function process()
     {
         let proc_text = songText
         globalEditor.setCode(proc_text)
         hasProcessed.current= true;
     }
+    
+    const lastSongTextRef = useRef("");
+
+    //useEffect that only triggers changes if an instrument is muted
+    useEffect(() => {
+    if (!globalEditor) return;
+
+    // Only update if songText changed due to a mute toggle (has _ difference)
+    const last = lastSongTextRef.current;
+    if (songText != last) {
+        // Detect mute/unmute: searches for _ in current songText or from the previous songText to
+        const isMuteChange = songText.includes("_") || last.includes("_");
+        //if an instrument has indeed been muted, update and evaluate
+        if (isMuteChange) 
+        {
+            globalEditor.setCode(songText);
+            globalEditor.evaluate();
+        }
+    }
+    lastSongTextRef.current = songText;
+    }, [songText]);
+
+
     //proc_and_play button 
     function process_and_play()
     {
-        if (globalEditor != null) {
+        if (globalEditor != null) 
+        {
         console.log(globalEditor)
         process()
         globalEditor.evaluate();
@@ -111,20 +135,6 @@ return (
                         update_song_function={update_song_text}
                         proc_and_play_function = {process_and_play}
                     /> 
-                    {/* <div className="col-4 accordion mx-3" id = "accordion_preprocess" >
-                         <div className="accordion-item">
-                            <h2 className="accordion-header">
-                                <button className="accordion-button bg-secondary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded = 'false' aria-controls="collapseOne">
-                                    Text to preprocess
-                                </button>
-                            </h2>
-                            <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordion_preprocess">
-                                <div className="accordion-body bg-secondary">
-                                    <textarea className="form-control bg-dark text-light" rows="10" id="proc" value={songText}></textarea> 
-                                </div>
-                            </div>
-                        </div>   
-                    </div> */}
                     <ProcComponent songText = {songText}/>
                 </div>
                 <div className="row justify-content-center pb-3">

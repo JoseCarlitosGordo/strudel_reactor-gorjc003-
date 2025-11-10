@@ -15,13 +15,14 @@ export default function InstrumentList({update_song_function, proc_and_play_func
 {
     const [instrument_list, update_instrument_list] = useState(new InstrumentListObject());
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [tempo, setTempo] = useState(100)
+    const [tempo, setTempo] = useState(50);
+    const [globalGain, setGain] = useState(1);
     //when instrument_list is updated, run playableNotes, which will update notes to play and then call update_song_function
-    useEffect(() =>{playableNotes(tempo)}, [instrument_list])
+    useEffect(() =>{playableNotes(tempo)}, [instrument_list, tempo, globalGain])
+    //runs when tempo is changed (will expand this so that it changes when )
     useEffect(() =>{
-        playableNotes(tempo);
         proc_and_play_function()
-    }, [tempo])
+    }, [tempo, globalGain])
     //open and closing modal for adding an instrument
     function openAddInstrument()
     {
@@ -38,7 +39,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
         var notes_to_play = 'setcpm('+tempo+'); \n'
         instrument_list.instruments.map(instrument => 
             (
-            notes_to_play +=  instrument.strudelCode + "\n"
+            notes_to_play +=  instrument.strudelCode + ".gain("+ globalGain+");\n"
             )
 
         );
@@ -67,18 +68,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
 
         
     }
-    //removing an instrument by filtering out the ones that are equal to the instrument to remove (yet to be properly implemented )
-    function remove_instrument(instrument_to_remove)
-    {
-        update_instrument_list(prev_state => 
-            (
-                {
-                    
-                    instruments:  [prev_state.instruments.filter((instrument) => instrument.name !== instrument_to_remove.name)]
-                }
-            )
-        );
-    }
+  
     //change the strudel code of a specific instrument within the list
     function update_instrument_instance(new_instrument)
     {
@@ -127,7 +117,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
            
             {/* Display modal for creating new instrument */}
             {isModalOpen && (
-                <CreateInstrument function_to_add={add_instrument} />
+                <CreateInstrument function_to_add={add_instrument} close_modal={closeModal} />
                
             )}
             <div className = 'row justify-content-center '>
@@ -143,7 +133,6 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                         name= {instrument.name}
                         notes = {instrument.notes}
                         function_to_update={update_instrument_instance}
-                        delete_function={remove_instrument}
                         proc_and_play = {proc_and_play_function}
                         />
                 
@@ -166,7 +155,15 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
                          <div className = 'col p-2'>
-                            <input type='range' className = 'form-range' min = '0' max = '1000' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value)}}/>
+                            <input type='range' className = 'form-range' min = '0' max = '99' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value)}}/>
+                        </div>
+                        <div className = 'col p-2'>
+                             <input type="range" className="form-range" min="0" max="3" step="0.01" value={globalGain} onChange={(e) => {
+                                                                                setGain(e.target.value);
+                                                                                playableNotes(tempo)
+                                                                              
+                                                                                }}
+                                                                                />
                         </div>
 
                     </div>

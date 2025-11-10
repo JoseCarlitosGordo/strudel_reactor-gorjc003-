@@ -7,8 +7,8 @@ export class Instrument
   constructor(name, notes)
   {
     this.name = name;
-    this.notes = notes
-    this.strudelCode = this.name + ': ' + this.notes + '.log();'
+    this.notes = notes;
+    this.strudelCode = this.name + ': ' + this.notes + '.log()'
    
     
   }
@@ -19,22 +19,15 @@ export class Instrument
 const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) => 
   {
     //create a new instrument 
-    const [data, setData] = useState(new Instrument(name, notes, ));
+    const [data, setData] = useState(new Instrument(name, notes));
     const [isMuted, setIsMuted] = useState(false)
-    //run this change everytime isMuted is toggled
-    //  useEffect(() => 
-    //   {
-    //     update_instrument_notes(data.notes, isMuted);
-    //     proc_and_play();
-    //   }, [isMuted]);
+    
 
     function update_mute(e)
     {
       //updates mute state
-      setIsMuted(e.target.checked);
       update_instrument_notes(data.notes, e.target.checked);
-      proc_and_play();  // now uses the updated mute state
-
+      setIsMuted(e.target.checked);
     }
     function update_instrument_notes(changed_value, muted = isMuted)
    {
@@ -43,7 +36,7 @@ const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) =>
       {
         replace = "_"
       }
-      const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value + '.log();' } 
+      const newData = {...data, notes: changed_value, strudelCode : replace + data.name + ': \n' + changed_value + '.log()' } 
       setData(newData)
       function_to_update(newData);
    }

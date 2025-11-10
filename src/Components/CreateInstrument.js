@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {Instrument }from "./Instrument.js"
 import "../cssFiles/CreateInstrument.css"
-export default function CreateInstrument({function_to_add})
+export default function CreateInstrument({function_to_add, close_modal})
 {
 
     function create_instrument()
@@ -37,8 +37,8 @@ export default function CreateInstrument({function_to_add})
 .gain(0.3)'>Piano</option>
               <option value='"<a1 e2>/8".clip(0.8).struct("x*8").s("supersaw").note()'>Bass</option>
             </select>
-             <label htmlFor='gain'><p> Gain slider</p></label> 
             <button id ="modal_button" onClick={create_instrument}>Create Instrument</button>
+            <button id ="close_button" onClick={close_modal}>Cancel</button>
           </div>
     </div>
     )
