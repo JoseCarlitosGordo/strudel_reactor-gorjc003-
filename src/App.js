@@ -22,6 +22,7 @@ export default function StrudelDemo() {
     const hasRun = useRef(false);
     const [songText, setSongText] = useState('')
     const hasProcessed = useRef(false)
+    const lastSongTextRef = useRef("");
     //whenever a change in instrument list is called, update preprocessed text
     function update_song_text(new_song_text)
     {
@@ -45,7 +46,15 @@ export default function StrudelDemo() {
     //stop song button 
     function stop_song()
     {
-        globalEditor.stop()
+        
+         if(!hasProcessed.current)
+        {
+            alert("Cannot stop song as there is no song to be stopped.")
+        }
+        else
+        {
+            globalEditor.stop()
+        }
     }
     //proc button, sets proc_text for any changes within the composition that aren't muting or unmuting
     function process()
@@ -54,17 +63,15 @@ export default function StrudelDemo() {
         globalEditor.setCode(proc_text)
         hasProcessed.current= true;
     }
-    
-    const lastSongTextRef = useRef("");
-
     //useEffect that only triggers changes if an instrument is muted
     useEffect(() => {
     if (!globalEditor) return;
 
-    // Only update if songText changed due to a mute toggle (has _ difference)
+    // Only update if songText changed due to a mute toggle
     const last = lastSongTextRef.current;
-    if (songText != last) {
-        // Detect mute/unmute: searches for _ in current songText or from the previous songText to
+    if (songText != last) 
+    {
+        //searches for _ in current songText or from the previous songText to determine if the change involves muting an instrument
         const isMuteChange = songText.includes("_") || last.includes("_");
         //if an instrument has indeed been muted, update and evaluate
         if (isMuteChange) 
@@ -76,16 +83,15 @@ export default function StrudelDemo() {
     lastSongTextRef.current = songText;
     }, [songText]);
 
-
     //proc_and_play button 
     function process_and_play()
     {
         if (globalEditor != null) 
         {
-        console.log(globalEditor)
-        process()
-        globalEditor.evaluate();
-    }
+            console.log(globalEditor)
+            process()
+            globalEditor.evaluate();
+        }
     }
     useEffect(() => {
 
