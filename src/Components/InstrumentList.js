@@ -157,14 +157,16 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
                          <div className = 'col p-2'>
-                            <input type='range' className = 'form-range' min = '0' max = '99' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value, globalGain)}}/>
+                            <label className="text-light" htmlFor="slider1"> Tempo slider</label>  
+                            <input type='range' id = 'slider1' className = 'form-range' min = '0' max = '99' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value, globalGain)}}/>
                         </div>
                         <div className = 'col p-2'>
-                             <input type="range" className="form-range" min="0" max="3" step="0.01" value={globalGain} onChange={(e) => {
-                                                                                setGain(e.target.value);
-                                                                                playableNotes(tempo, e.target.value )
-                                                                                }}
-                                                                                />
+                            <label className="text-light" htmlFor="slider2"> Gain slider</label>  
+                            <input type="range" id = 'slider2' className="form-range" min="0" max="3" step="0.01" value={globalGain} onChange={(e) => {
+                                                                            setGain(e.target.value);
+                                                                            playableNotes(tempo, e.target.value )
+                                                                            }}
+                                                                            />
                         </div>
 
                     </div>

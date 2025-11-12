@@ -25,10 +25,11 @@ const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) =>
 
     function update_mute(e)
     {
-      //updates mute state, which is then reflected in songText
+      //updates mute state, which is then reflected in songText and processed in the useEffect in app.js
       update_instrument_notes(data.notes, e.target.checked);
       setIsMuted(e.target.checked);
     }
+    //notes all changes to individual instrument's notes
     function update_instrument_notes(changed_value, muted = isMuted)
    {
     //if it is muted, prefix the string with an underscore
@@ -50,7 +51,8 @@ const InstrumentObject = ({name, notes, function_to_update, proc_and_play} ) =>
         <h5 className="card-title">Instrument Name: {data.name}</h5>
         <label htmlFor={'notes_for_' + data.name}>Composition editor</label>
         <textarea id = {'notes_for_' + data.name} className ='form-control' onChange= {(changed_value) => update_instrument_notes(changed_value.target.value)} value = {data.notes}/>
-        <input type="checkbox" id={"mute_button_"+ data.name } checked={isMuted} onChange = {update_mute}/>
+        <input type="checkbox"  className= 'form-check-input'id={"mute_button_"+ data.name } checked={isMuted} onChange = {update_mute}/>
+        <label htmlFor={'mute_button_' + data.name} className='form-check-label'>Mute</label>
       </div>
     </div>
   );
