@@ -65,22 +65,22 @@ export default function StrudelDemo() {
     }
     //useEffect that only triggers changes if an instrument is muted
     useEffect(() => {
-    if (!globalEditor) return;
+        if (!globalEditor) return;
 
-    // Only update if songText changed due to a mute toggle
-    const last = lastSongTextRef.current;
-    if (songText != last) 
-    {
-        //searches for _ in current songText or from the previous songText to determine if the change involves muting an instrument
-        const isMuteChange = songText.includes("_") || last.includes("_");
-        //if an instrument has indeed been muted, update and evaluate
-        if (isMuteChange) 
+        // Only update if songText changed due to a mute toggle
+        const last = lastSongTextRef.current;
+        if (songText != last) 
         {
-            globalEditor.setCode(songText);
-            globalEditor.evaluate();
+            //searches for _ in current songText or from the previous songText to determine if the change involves muting an instrument
+            const isMuteChange = songText.includes("_") || last.includes("_");
+            //if an instrument has indeed been muted, update and evaluate
+            if (isMuteChange) 
+            {
+                globalEditor.setCode(songText);
+                globalEditor.evaluate();
+            }
         }
-    }
-    lastSongTextRef.current = songText;
+        lastSongTextRef.current = songText;
     }, [songText]);
 
     //proc_and_play button 

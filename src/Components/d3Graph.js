@@ -54,7 +54,7 @@ export default function D3Graph()
             .attr('transform', 'translate(30,3)');
 
 
-        //Actual data shit goes here
+        //Actual data goes here
         chartGroup.append('path')
             .datum(graphData)
             .attr('fill', 'white')
@@ -72,6 +72,7 @@ export default function D3Graph()
             .call(yAxis);
     }, [graphData])
     
+    //converts the console's log to a note
     function logToNum(input)
     {
         let letters = {'C': 0,  'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}

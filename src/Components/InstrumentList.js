@@ -19,7 +19,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
     const [globalGain, setGain] = useState(1);
     //when instrument_list is updated, run playableNotes, which will update notes to play and then call update_song_function
     useEffect(() =>{playableNotes(tempo)}, [instrument_list, tempo, globalGain])
-    //runs when tempo is changed (will expand this so that it changes when )
+    //runs when tempo or global gain is changed
     useEffect(() =>{
         proc_and_play_function()
     }, [tempo, globalGain])
@@ -78,8 +78,10 @@ export default function InstrumentList({update_song_function, proc_and_play_func
             
             instruments:  prev_list.instruments.map(instrument =>
                 {
+                    //if the instrument name is equal to the instrument that we update, 
                     if(instrument.name == new_instrument.name)
                     {
+                        //return the parts of the old instrument that stay the same and add the updated values of new_instrument
                         return {...instrument, ...new_instrument};
                     }
                     else
@@ -103,6 +105,7 @@ export default function InstrumentList({update_song_function, proc_and_play_func
     function load_from_storage()
     {
         var instrument_replacement =localStorage.getItem("instrument_list")
+        //populate instrument list with values from local storage
         update_instrument_list(Object.assign(new InstrumentListObject(), JSON.parse(instrument_replacement)))
     }
   
@@ -128,7 +131,6 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                     instrument_list.instruments.map((instrument, index) => (
                     //Loop over every instrument in instrument_list and create a new InstrumentObject with it
                         
-                
                         <InstrumentObject 
                         name= {instrument.name}
                         notes = {instrument.notes}
@@ -161,7 +163,6 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                              <input type="range" className="form-range" min="0" max="3" step="0.01" value={globalGain} onChange={(e) => {
                                                                                 setGain(e.target.value);
                                                                                 playableNotes(tempo)
-                                                                              
                                                                                 }}
                                                                                 />
                         </div>
@@ -172,7 +173,4 @@ export default function InstrumentList({update_song_function, proc_and_play_func
         </div>
 
     );
-    //TODO: 1. ensure that all instruments that get instantiated getadded to this.instruments and converted to valid strudel code
-    //(STRUDEL CODE IS KEPT IN proc element)
-}   //2. Return this.instruments.map<Card>Instruments<Card>
-//3. Add a button that allows user to create a new Instrument. 
+}   
