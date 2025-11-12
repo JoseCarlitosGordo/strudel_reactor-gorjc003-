@@ -34,12 +34,12 @@ export default function InstrumentList({update_song_function, proc_and_play_func
     }
 
     //This function will be called anytime an instrument is updated, added or deleted. 
-    function playableNotes(tempo)
+    function playableNotes(tempo, gain= globalGain)
     {   
         var notes_to_play = 'setcpm('+tempo+'); \n'
         instrument_list.instruments.map(instrument => 
             (
-            notes_to_play +=  instrument.strudelCode + ".gain("+ globalGain+");\n"
+            notes_to_play +=  instrument.strudelCode + ".gain("+gain+");\n"
             )
 
         );
@@ -157,12 +157,12 @@ export default function InstrumentList({update_song_function, proc_and_play_func
                             <button type = 'button' className='btn btn-primary' onClick={load_from_storage}> Load from  Storage</button>
                         </div>
                          <div className = 'col p-2'>
-                            <input type='range' className = 'form-range' min = '0' max = '99' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value)}}/>
+                            <input type='range' className = 'form-range' min = '0' max = '99' value = {tempo} onChange = {e => {setTempo(e.target.value); playableNotes(e.target.value, globalGain)}}/>
                         </div>
                         <div className = 'col p-2'>
                              <input type="range" className="form-range" min="0" max="3" step="0.01" value={globalGain} onChange={(e) => {
                                                                                 setGain(e.target.value);
-                                                                                playableNotes(tempo)
+                                                                                playableNotes(tempo, e.target.value )
                                                                                 }}
                                                                                 />
                         </div>
