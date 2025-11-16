@@ -1,6 +1,6 @@
 # Hello there!
 
-Link to Youtube demonstration of the project: [CLICK HERE!] (https://www.youtube.com/watch?v=uCHYFsyc0y8)
+[Click here for a video demonstration of the project..](https://www.youtube.com/watch?v=uCHYFsyc0y8)
 
 This project has a few cool features that make it stand out. 
 
