@@ -109,8 +109,6 @@ export default function InstrumentList({update_song_function, proc_and_play_func
         update_instrument_list(Object.assign(new InstrumentListObject(), JSON.parse(instrument_replacement)))
     }
   
-    
-
     return(
         <div>
             
